@@ -39,15 +39,24 @@ public class l001{
         display(node.right);
     }
 
-    // public static int width(Node node,int[] minmax,int level){
-    //     width(node.left)
-    // }
+    public static void width(Node node,int[] minmax,int level){
+        if(node == null) return;
+        minmax[0] = Math.min(minmax[0], level);
+        minmax[1] = Math.max(minmax[1],level);
+        width(node.left,minmax,level-1);
+        width(node.right, minmax, level+1);
+        return;
+    }
 
     public static void solve(){
         // int[] arr={50,25,12,-1,-1,37,30,-1,-1,-1,75,62,-1,70,-1,-1,87,-1,-1};
         int[] arr={10,20,40,-1,-1,50,80,-1,-1,90,-1,-1,30,60,100,-1,-1,-1,70,110,-1,-1,120,-1,-1};
         Node root = constructTree(arr);
         display(root);
+        int[] minmax = new int[2];
+        width(root,minmax, 0);
+        int width = minmax[1]-minmax[0]+1;
+        System.out.println(width);
     }
 
 }
