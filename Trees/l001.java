@@ -77,9 +77,43 @@ public class l001{
             System.out.println(node.data);
             maxlevel = level;
         }
-        int rh = leftview(node.right,level+1);
         int lh = leftview(node.left,level+1);
+        int rh = leftview(node.right,level+1);
         return lh;
+    }
+
+    public static int topview(Node node,int level,HashMap<Integer,Integer> hm){
+        if(node == null) return -1;
+        if(!hm.containsKey(level)){
+            // System.out.println(node.data);
+            hm.put(level, node.data);
+        }
+        int lh = topview(node.left, level-1,hm);
+        int rh = topview(node.right, level+1,hm);
+        return rh;
+    }
+
+    public static class allPair{
+        int height = 0;
+        int size = 0;
+        boolean find = false;
+        int ceil = (int)1e8;
+        int floor = -(int)1e8;
+        Node pred = null,succ =null,prev = null;
+    }
+
+    public static void allPairSolutions(Node node,int level,int data,allPair pair){
+        if(node == null) return;
+        pair.size++;
+        pair.height = Math.max(pair.height,level);
+        pair.find = pair.find || node.data==data;
+        if(node.data > data) pair.ceil=Math.min(pair.ceil,node.data);
+        if(node.data < data) pair.floor = Math.max(pair.floor,node.data);
+        if(node.data == data) pair.pred = pair.prev;
+        if(pair.prev!=null && pair.prev.data == data) pair.succ = node;
+        pair.prev = node;
+        allPairSolutions(node.left,level+1,data,pair);
+        allPairSolutions(node.right,level+1,data,pair);
     }
 
     public static void solve(){
@@ -89,12 +123,24 @@ public class l001{
         display(root);
         int[] minmax = new int[2];
         // width(root,minmax, 0);
-        int width = minmax[1]-minmax[0]+1;
+        // int width = minmax[1]-minmax[0]+1;
         // System.out.println(width);
         // System.out.println(size(root));
         // System.out.println(height(root));
-        leftview(root,0);
+        // leftview(root,0);
         // System.out.println(maxlevel);
+        // HashMap<Integer,Integer> hm = new HashMap<>();
+        // topview(root, 0,hm);
+        // System.out.println(hm);
+        allPair pair = new allPair();
+        allPairSolutions(root,0,90,pair);
+        System.out.println(pair.size);
+        System.out.println(pair.height);
+        System.out.println(pair.find);
+        System.out.println(pair.ceil);
+        System.out.println(pair.floor);
+        System.out.println(pair.pred.data +" "+pair.succ.data);
+
     }
 
 }
