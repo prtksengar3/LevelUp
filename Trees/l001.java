@@ -116,6 +116,29 @@ public class l001{
         allPairSolutions(node.right,level+1,data,pair);
     }
 
+    public static class tpair{
+        Node node = null;
+        boolean leftDone = false;
+        boolean rightDone = false;
+        boolean selfDone = false;
+        tpair(Node node,boolean leftDone,boolean rightDone,boolean selfDone){
+            this.node = node;
+            this.leftDone = leftDone;
+            this.rightDone = rightDone;
+            this.selfDone = selfDone; 
+        }
+    }
+
+    public static void postorder(Node node){
+        Stack<tpair> st = new Stack<>();
+        tpair 
+        if()
+    }
+
+    public static void diameter(){
+
+    }
+
     public static void solve(){
         // int[] arr={50,25,12,-1,-1,37,30,-1,-1,-1,75,62,-1,70,-1,-1,87,-1,-1};
         int[] arr={10,20,40,-1,-1,50,80,-1,-1,90,-1,-1,30,60,100,-1,-1,-1,70,110,-1,-1,120,-1,-1};
