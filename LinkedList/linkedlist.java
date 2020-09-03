@@ -11,7 +11,7 @@ public class linkedlist{
     Node tail = null;
     int size = 0;
 
-    public int Size(){
+    public int size(){
         return this.size;
     }
 
