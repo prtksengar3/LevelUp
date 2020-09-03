@@ -1,20 +1,20 @@
-public class queue{
+public class Queue{
     private int[] arr;
     private int size;
     private int head;
     private int tail;
     private int maxsize;
 
-    private void push_(int val){
+    protected void push_(int val){
         arr[++this.tos] = val;
         this.size++;
     }
 
-    public stack(){
+    public Queue(){
         setvalues(10);
     }
 
-    public stack(int n){
+    public Queue(int n){
         setvalues(n);
     }
 
@@ -24,10 +24,6 @@ public class queue{
         this.arr = new int[n];
         this.head = 0;
         this.tail = 0;
-    }
-
-    public int capacity(){
-        return this.maxsize;
     }
 
     public void push(int val) throws Exception{
@@ -50,29 +46,40 @@ public class queue{
     }
 
     public int size(){
-        return this.size();
+        return this.size;
+    }
+
+    public int capacity(){
+        return this.maxsize;
     }
 
     public boolean isEmpty(){
         return this.size==0;
     }
 
+    protected int top_(){
+        return this.arr[this.tos];
+    }
+
     public int top() throws Exception{
         if(this.size==0){
             throw new Exception("Stack is Empty");
         }
-        return arr[this.tos];
+        return top_();
     }
 
-    private void pop_(){
-        arr[tos--] = 0;
+    protected int pop_(){
+        int rv = top_();
+        this.arr[this.tos--] = 0;
+        this.size--;
+        return rv;
     }
 
-    public void pop() throws Exception{
+    public int pop() throws Exception{
         if(this.size==0){
             throw new Exception("Stack is Empty");
         }
-        pop_();
+       return pop_();
     }
 
 }
